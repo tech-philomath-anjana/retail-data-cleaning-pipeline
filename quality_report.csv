@@ -1,0 +1,8 @@
+metric,before_cleaning,after_cleaning,change
+row_count,1067371,1010534,-56837
+null_Description,4382,0,-4382
+null_CustomerID,243007,231043,-11964
+duplicate_rows,34335,0,-34335
+negative_quantity_rows,22950,0,-22950
+zero_or_negative_price_rows,6207,0,-6207
+distinct_stockcodes,5305,4984,-321
