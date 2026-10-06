@@ -48,16 +48,54 @@ demand keeps those sales. The full table is in `quality_report.csv`.
 | 13 | Build the before/after quality report |
 | 14 | Export `clean_transactions.csv` and `clean_retail.csv` |
 
-## Analysis
+## What the clean data shows
 
-Four charts from the cleaned product-month table, all in the notebook and in `charts/`:
+Four charts from the cleaned product-month table.
 
-1. Top 20 products by total units sold
-2. Zero-sale months per high-volume product, as a rough stockout-risk signal
-3. Total monthly revenue, December 2009 to December 2011
-4. Top 10 countries by revenue and units sold
+### 1. The top sellers are cheap, everyday items, not one big hit
+
+![Top 20 products by total units sold](charts/1_top_20_products.png)
+
+World War 2 Gliders Asstd Designs leads with just over 106,000 units, ahead of White Hanging Heart
+T-Light Holder (about 98,000) and Jumbo Bag Red Retrospot (about 96,000). Almost the whole top 20
+is cheap items people buy in bulk: cake cases, tealight holders, gift bags, storage jars. None of
+them are big-ticket products, they just sell month after month.
+
+### 2. The stockout-risk proxy is mostly picking up seasonal products
 
 ![Zero-sale months per high-volume product](charts/2_zero_sale_months.png)
+
+Glitter Christmas Tree With Bells went 15 months with zero units sold, and most of the list is
+Christmas decorations, wreaths and advent calendars. A Christmas ornament with 15 zero-sale months
+isn't a stockout, it's a seasonal product doing what seasonal products do. With no stock-level
+data in this dataset, this chart works as a seasonality flag rather than a restocking alarm.
+
+### 3. Revenue peaks every November and dips every February
+
+![Total monthly revenue](charts/3_monthly_revenue.png)
+
+Revenue climbs from about £0.94M in September 2010 to roughly £1.5M in November 2010, and the
+November 2011 peak is a little higher, just over £1.55M. February is the low point in both years,
+around £0.53–0.57M. The drop in December 2011 isn't real: the dataset only covers the first 9 days
+of that month.
+
+### 4. The UK dominates, and Denmark buys differently
+
+![Top 10 countries by revenue and units sold](charts/4_top_10_countries.png)
+
+The UK brings in about £17M against Ireland's roughly £0.65M in second place, over 25 times more,
+which is why the chart needs a log scale. Denmark's revenue is lower than most of the top 10 but
+its unit count is much higher, so Danish orders lean towards cheaper items bought in bulk.
+
+## Limitations
+
+- The data ends in December 2011, so these demand patterns may not match how people shop today.
+- The zero-sale-month proxy can't tell a real stockout from seasonal dormancy or a discontinued
+  product, because the dataset has no stock levels. Chart 2 shows that limitation in practice.
+- Filling bad prices with each product's median assumes its price stayed roughly stable, which
+  understates the effect of any promotions or discounts.
+- Keeping guest rows was right for product-level analysis, but customer-level work would still
+  need to deal with the 22.9% of sales that have no customer attached.
 
 ## Outputs
 
